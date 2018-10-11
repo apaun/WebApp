@@ -25,9 +25,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <nav class="breadcrumb">
-                    <a class="breadcrumb-item" href="@Url.Action("Offering","Home")">@ViewBag.Topic.TopicParentString</a>
-                    <a class="breadcrumb-item" href="@Url.Action("TopicPage","Topic", new { topicParent = ViewBag.Topic.TopicParent, topicname = ViewBag.Topic.TopicName })">@ViewBag.Topic.TopicNameString</a>
-                    <span class="breadcrumb-item active">@ViewBag.Topic.SubTopicSelected.Key</span>
+                    <a class="breadcrumb-item" href="@Url.Action("Offering","Home")">@ViewBag.Topic.Topicparent.ParentNameString</a>
+                    <a class="breadcrumb-item" href="@Url.Action("TopicPage","Topic", new { topicParent = ViewBag.Topic.Topicparent.ParentName, topicname = ViewBag.Topic.TopicName })">@ViewBag.Topic.TopicNameString</a>
+                    <span class="breadcrumb-item active">@ViewBag.Topic.SubTopicSelected.SubTopicTopicName</span>
                 </nav>
             </div>
         </div>
@@ -40,9 +40,9 @@
                     <li>
                         <div class="link"><i class="fa fa-link"></i>@ViewBag.Topic.TopicNameString<i class="fa fa-chevron-down"></i></div>
                         <ul class="submenu" style="display: block;">
-                            @foreach (var subtopic in @ViewBag.Topic.SubTopicDictionary)
+                            @foreach (var subtopic in @ViewBag.Topic.SubTopicList)
                             {
-                                <li><a href="@Url.Action("TopicPage","Topic", new {topicParent = ViewBag.Topic.TopicParent,  topicname = @ViewBag.Topic.TopicName, subTopicName = @subtopic.Key })">@subtopic.Value</a></li>
+                                <li><a href="@Url.Action("TopicPage","Topic", new {topicParent = ViewBag.Topic.Topicparent.ParentName,  topicname = @ViewBag.Topic.TopicName, subTopicName = @subtopic.SubTopicDescription })">@subtopic.SubTopicTopicName</a></li>
                             }
                         </ul>
                     </li>
@@ -52,12 +52,12 @@
             <div class="col-lg-8 accordionsection" style="background : white">
                 <div class="row">
                     <div class="col-lg-12" style="border-bottom-style:solid; border-bottom-width : 10px; border-bottom-color : #e8eaed">
-                        <h4 style="margin-top:15px;">@ViewBag.Topic.SubTopicSelected.Value</h4>
+                        <h4 style="margin-top:15px;">@ViewBag.Topic.SubTopicSelected.SubTopicTopicName</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12" style="padding : 10px;">
-                        @RenderPage($"~/Views/Subtopic/{@ViewBag.Topic.TopicParent}/{@ViewBag.Topic.TopicName}/{@ViewBag.Topic.SubTopicSelected.Key}.cshtml")
+                        @RenderPage($"~/Views/Subtopic/{@ViewBag.Topic.Topicparent.ParentName}/{@ViewBag.Topic.TopicName}/{@ViewBag.Topic.SubTopicSelected.SubTopicDescription}.cshtml")
                     </div>
                 </div>
             </div>

@@ -13,54 +13,12 @@ namespace WebAppTry1.Models
 
         public string ParentNameString { get; set; }
 
-        public TopicType SelectedTopic { get; set; }
+        public string TopicIcon { get; set; }
 
-        public List<Topic> Topics { get; set; }
-
-        private TopicParent(TopicParentType parentType, TopicType topicType = TopicType.None, string subTopic = "")
+        public TopicParent(TopicParentType parentType)
         {
             ParentName = parentType;
             ParentNameString = EnumClass.GetTopicParentTypeString(ParentName);
-            SelectedTopic = topicType;
-            Topics = new List<Topic>();
-
-        }
-
-        public TopicParent(string parentNameString, string topic = "None", string subTopic = "")
-        {
-            ParentName = (TopicParentType)Enum.Parse(typeof(TopicParentType), parentNameString);
-            ParentNameString = parentNameString;
-            SelectedTopic = (TopicType)Enum.Parse(typeof(TopicType), topic);
-            Topics = new List<Topic>();
-        }
-
-
-        private void PopulateTopicsList()
-        {
-            if (ParentName == TopicParentType.DataStructures)
-            {
-                if (SelectedTopic == TopicType.None)
-                {
-                    Topics.Add(new Topic(ParentName, TopicType.LinkedList));
-                    Topics.Add(new Topic(ParentName, TopicType.Tree));
-                }
-                else
-                {
-                    Topics.Add(new Topic(ParentName, SelectedTopic));
-                }
-                
-            }
-            else if (ParentName == TopicParentType.Others)
-            {
-                if (SelectedTopic == TopicType.None)
-                {
-                    Topics.Add(new Topic(ParentName, TopicType.SolidPrinciples));
-                }
-                else
-                {
-                    Topics.Add(new Topic(ParentName, SelectedTopic));
-                }
-            }
         }
 
     }

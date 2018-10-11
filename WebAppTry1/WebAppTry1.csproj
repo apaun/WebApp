@@ -209,7 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SubTopic.cs" />
     <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\TopicParent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,13 +236,17 @@
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Offering.cshtml" />
     <Content Include="Views\Topic\TopicPage.cshtml" />
-    <Content Include="Views\Subtopic\Others\SolidPrinciples\SP1.cshtml" />
-    <Content Include="Views\Subtopic\DataStructures\LinkedList\LL1.cshtml" />
-    <Content Include="Views\Subtopic\DataStructures\LinkedList\LL2.cshtml" />
-    <Content Include="Views\Subtopic\Others\SolidPrinciples\SP2.cshtml" />
-    <Content Include="Views\Subtopic\Others\SolidPrinciples\SP3.cshtml" />
+    <Content Include="Views\Subtopic\Others\Solid_Principles\SP1.cshtml" />
+    <Content Include="Views\Subtopic\DataStructures\Linked_List\LL1.cshtml" />
+    <Content Include="Views\Subtopic\DataStructures\Linked_List\LL2.cshtml" />
+    <Content Include="Views\Subtopic\Others\Solid_Principles\SP2.cshtml" />
+    <Content Include="Views\Subtopic\Others\Solid_Principles\SP3.cshtml" />
     <Content Include="Views\Subtopic\DataStructures\Tree\T1.cshtml" />
     <Content Include="Views\Subtopic\DataStructures\Tree\T2.cshtml" />
+    <Content Include="Views\Subtopic\Others\Design_Patterns\DP1.cshtml" />
+    <Content Include="Views\Subtopic\Others\Design_Patterns\DP2.cshtml" />
+    <Content Include="Views\Subtopic\DataStructures\Graphs\G1.cshtml" />
+    <Content Include="Views\Subtopic\DataStructures\Graphs\G2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

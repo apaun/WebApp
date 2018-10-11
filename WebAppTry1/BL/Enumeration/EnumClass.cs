@@ -17,9 +17,11 @@ namespace WebAppTry1.BL.Enumeration
 
         public enum TopicType
         {
-            LinkedList,
+            Linked_List,
             Tree,
-            SolidPrinciples,
+            Graphs,
+            Solid_Principles,
+            Design_Patterns,
             None
         }
 
@@ -30,23 +32,7 @@ namespace WebAppTry1.BL.Enumeration
 
         public static string GetTopicTypeString(TopicType topicType)
         {
-            string topic = "";
-            switch (topicType)
-            {
-                case TopicType.LinkedList:
-                    topic = "Linked List";
-                    break;
-                case TopicType.Tree:
-                    topic = "Tree";
-                    break;
-                case TopicType.SolidPrinciples:
-                    topic = "Solid Principles";
-                    break;
-                default:
-                    break;
-            }
-
-            return topic;
+            return topicType.ToString().Replace('_', ' ');
         }
 
         public static string GetTopicParentTypeString(TopicParentType topicType)

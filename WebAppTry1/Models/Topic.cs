@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using WebAppTry1.BL.Enumeration;
 using static WebAppTry1.BL.Enumeration.EnumClass;
@@ -10,42 +11,40 @@ namespace WebAppTry1.Models
     public class Topic
     {
         #region Public Properties
-        public TopicParentType TopicParent { get; set; }
-
-        public string TopicParentString { get; set; }
-
         public TopicType TopicName { get; set; }
 
         public string TopicNameString { get; set; }
+
+        public TopicParent Topicparent { get; set; }
 
         public string TopicIcon { get; set; }
 
         public Dictionary<string, List<string>> TopicParentMapping { get; set; }
 
-        public Dictionary<string, string> SubTopicDictionary { get; set; }
+        public List<SubTopic> SubTopicList { get; set; }
 
-        public KeyValuePair<string, string> SubTopicSelected { get; set; }
+        public SubTopic SubTopicSelected { get; set; }
+
 
         #endregion
 
         #region Constructor
         public Topic(TopicParentType topicParent, TopicType topicName, string subTopicName = "")
         {
-            TopicParent = topicParent;
-            TopicParentString = EnumClass.GetTopicParentTypeString(topicParent);
+            Topicparent = new TopicParent(topicParent);
             TopicName = topicName;
             TopicNameString = EnumClass.GetTopicTypeString(topicName);
-            SubTopicDictionary = new Dictionary<string, string>();
+            SubTopicList = new List<SubTopic>();
             TopicParentMapping = new Dictionary<string, List<string>>();
             PrepareSubTopicDictonary();
 
             if (string.IsNullOrWhiteSpace(subTopicName))
             {
-                SubTopicSelected = SubTopicDictionary.FirstOrDefault();
+                SubTopicSelected = SubTopicList.FirstOrDefault(); 
             }
             else
             {
-                SubTopicSelected = SubTopicDictionary.Where(x => x.Key == subTopicName).FirstOrDefault();
+                SubTopicSelected = SubTopicList.Where(x => x.SubTopicDescription == subTopicName).FirstOrDefault();
             }
         }
         #endregion
@@ -58,7 +57,7 @@ namespace WebAppTry1.Models
             {
                 TopicParentMapping.Add(parentTypeString, new List<string>());
             }
-            TopicParentMapping[parentTypeString].Add(EnumClass.GetTopicTypeString(TopicType.LinkedList));
+            TopicParentMapping[parentTypeString].Add(EnumClass.GetTopicTypeString(TopicType.Linked_List));
             TopicParentMapping[parentTypeString].Add(EnumClass.GetTopicTypeString(TopicType.Tree));
 
             parentTypeString = EnumClass.GetTopicParentTypeString(TopicParentType.Others);
@@ -72,18 +71,29 @@ namespace WebAppTry1.Models
         {
             switch (TopicName)
             {
-                case TopicType.LinkedList:
-                    SubTopicDictionary.Add("LL1", "Introduction");
-                    SubTopicDictionary.Add("LL2", "Creating a Linked List");
+                case TopicType.Linked_List:
+                    SubTopicList.Add(new SubTopic("Introduction ", "LL1"));
+                    SubTopicList.Add(new SubTopic("Creating a Linked List", "LL2"));
                     break;
                 case TopicType.Tree:
-                    SubTopicDictionary.Add("T1", "Introduction");
-                    SubTopicDictionary.Add("T2", "Creating a Tree");
+                    SubTopicList.Add(new SubTopic("Introduction", "T1"));
+                    SubTopicList.Add(new SubTopic("Creating a Tree", "T2"));
                     break;
-                case TopicType.SolidPrinciples:
-                    SubTopicDictionary.Add("SP1", "Introduction");
-                    SubTopicDictionary.Add("SP2", "Single Responsibility Principle");
-                    SubTopicDictionary.Add("SP3", "Open Closed Principle");
+                case TopicType.Graphs:
+                    SubTopicList.Add(new SubTopic("Introduction", "G1"));
+                    SubTopicList.Add(new SubTopic("Creating a Graph", "G2"));
+                    break;
+                case TopicType.Solid_Principles:
+                    SubTopicList.Add(new SubTopic("Introduction", "SP1"));
+                    SubTopicList.Add(new SubTopic("Single Responsibility Principle", "SP2"));
+                    SubTopicList.Add(new SubTopic("Open Closed Principle", "SP3"));
+                    break;
+                case TopicType.Design_Patterns:
+                    SubTopicList.Add(new SubTopic("Introduction", "DP1"));
+                    SubTopicList.Add(new SubTopic("Single Responsibility Principle", "DP2"));
+                    SubTopicList.Add(new SubTopic("Open Closed Principle", "DP3"));
+                    break;
+                case TopicType.None:
                     break;
                 default:
                     break;
